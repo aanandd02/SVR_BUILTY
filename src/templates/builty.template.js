@@ -1,33 +1,39 @@
-const { logoBase64 } = require('../utils/logo');
+const { logoBase64 } = require("../utils/logo");
 
-function generatePDFHTML(data, copyType = 'all') {
+function generatePDFHTML(data, copyType = "all") {
   const rows = data.items || [{}];
-  let itemsHTML = '';
+  let itemsHTML = "";
 
   for (let i = 0; i < Math.max(rows.length, 5); i++) {
     const item = rows[i] || {};
     itemsHTML += `
       <tr>
-        <td class="cell pkg">${item.packages || ''}</td>
-        <td class="cell method">${item.methodOfPacking || ''}</td>
-        <td class="cell goods">${item.nameOfGoods || ''}</td>
-        <td class="cell mark">${item.privateMark || ''}</td>
-        <td class="cell actual">${item.actualWeight || ''}</td>
-        <td class="cell charged">${item.chargedWeight || ''}</td>
-        <td class="cell rate">${item.rate || ''}</td>
+        <td class="cell pkg">${item.packages || ""}</td>
+        <td class="cell method">${item.methodOfPacking || ""}</td>
+        <td class="cell goods">${item.nameOfGoods || ""}</td>
+        <td class="cell mark">${item.privateMark || ""}</td>
+        <td class="cell actual">${item.actualWeight || ""}</td>
+        <td class="cell charged">${item.chargedWeight || ""}</td>
+        <td class="cell rate">${item.rate || ""}</td>
       </tr>`;
   }
 
-  const check = (cond) => cond ? '<span class="tick">&#9745;</span>' : '<span class="tick">&#9744;</span>';
+  const check = (cond) =>
+    cond
+      ? '<span class="tick">&#9745;</span>'
+      : '<span class="tick">&#9744;</span>';
 
-  const totalPackages = (data.items || []).reduce((sum, item) => sum + (parseInt(item.packages) || 0), 0);
+  const totalPackages = (data.items || []).reduce(
+    (sum, item) => sum + (parseInt(item.packages) || 0),
+    0,
+  );
 
   function buildCopyPage(copyLabel) {
     return `
 <div class="container">
   <div class="header">
     <div class="header-content">
-      ${logoBase64 ? `<img src="${logoBase64}" class="header-logo header-logo-left" alt="SVR">` : ''}
+      ${logoBase64 ? `<img src="${logoBase64}" class="header-logo header-logo-left" alt="SVR">` : ""}
       <div class="header-text">
         <div class="hindi-blessing">॥ जय माँ विन्ध्यवासिनी ॥</div>
         <div class="company-name">Shree Vishwanath Roadways</div>
@@ -43,11 +49,22 @@ function generatePDFHTML(data, copyType = 'all') {
   <div class="copy-type-banner">${copyLabel}</div>
   <div class="cn-title">CONSIGNMENT NOTE</div>
 
-  <div class="info-row">
-    <span><span class="field-label">Date:</span> <span class="field-value">${data.date || ''}</span></span>
-    <span><span class="field-label">No.:</span> <span class="field-value">${data.consignmentNo || ''}</span></span>
-    <span><span class="field-label">Code No.:</span> <span class="field-value">${data.codeNo || ''}</span></span>
-  </div>
+<div class="info-row">
+  <span>
+    <span class="field-label">Code No.:</span>
+    <span class="field-value">${data.codeNo || ""}</span>
+  </span>
+
+  <span>
+    <span class="field-label">CONSIGNMENT:</span>
+    <span class="field-value">${data.consignmentNo || ""}</span>
+  </span>
+
+  <span>
+    <span class="field-label">Date:</span>
+    <span class="field-value">${data.date || ""}</span>
+  </span>
+</div>
   <div class="mid-section">
     <div class="caution-box">
       <div class="caution-title">CAUTION</div>
@@ -58,49 +75,49 @@ function generatePDFHTML(data, copyType = 'all') {
       <div><span class="field-label">GST :</span> 24APLPT4893E1ZF</div>
       <div style="margin-top:4px; font-size:9px;">
         <span class="field-label">Person liable for paying service tax:</span><br>
-        ${check(data.serviceTaxLiable === 'consignor')} Consignor
-        ${check(data.serviceTaxLiable === 'consignee')} Consignee
-        ${check(data.serviceTaxLiable === 'gta')} Goods Transport Agency
+        ${check(data.serviceTaxLiable === "consignor")} Consignor
+        ${check(data.serviceTaxLiable === "consignee")} Consignee
+        ${check(data.serviceTaxLiable === "gta")} Goods Transport Agency
       </div>
     </div>
   </div>
 
   <div class="insurance-section">
-    <div><span class="field-label">LORRY No. :</span> ${data.lorryNo || ''}</div>
+    <div><span class="field-label">LORRY No. :</span> ${data.lorryNo || ""}</div>
     <div style="margin-top:2px;"><span class="field-label">INSURANCE:</span>
-      ${check(data.insuranceStatus === 'not_insured')} The Customer has stated that he has not Insured the consignment<br>
-      ${check(data.insuranceStatus === 'insured')} he has Insured the consignment with<br>
-      <span class="field-label">Company:</span> ${data.insuranceCompany || ''} &nbsp;
-      <span class="field-label">Policy No.:</span> ${data.policyNo || ''} &nbsp;
-      <span class="field-label">Date:</span> ${data.policyDate || ''}<br>
-      <span class="field-label">Amount:</span> ${data.insuranceAmount || ''} &nbsp;
-      <span class="field-label">Risk:</span> ${data.insuranceRisk || ''}
+      ${check(data.insuranceStatus === "not_insured")} The Customer has stated that he has not Insured the consignment<br>
+      ${check(data.insuranceStatus === "insured")} he has Insured the consignment with<br>
+      <span class="field-label">Company:</span> ${data.insuranceCompany || ""} &nbsp;
+      <span class="field-label">Policy No.:</span> ${data.policyNo || ""} &nbsp;
+      <span class="field-label">Date:</span> ${data.policyDate || ""}<br>
+      <span class="field-label">Amount:</span> ${data.insuranceAmount || ""} &nbsp;
+      <span class="field-label">Risk:</span> ${data.insuranceRisk || ""}
     </div>
   </div>
 
   <div class="transport-section">
     <div class="transport-mode">
       <span class="field-label">Transport Mode:</span><br>
-      ${check(data.transportMode === 'road')} 1) By Road<br>
-      ${check(data.transportMode === 'train')} 2) By Train<br>
-      ${check(data.transportMode === 'air')} 3) By Air
+      ${check(data.transportMode === "road")} 1) By Road<br>
+      ${check(data.transportMode === "train")} 2) By Train<br>
+      ${check(data.transportMode === "air")} 3) By Air
     </div>
     <div class="from-to">
-      <div><span class="field-label">From:</span> ${data.from || ''}</div>
-      <div><span class="field-label">To:</span> ${data.to || ''}</div>
+      <div><span class="field-label">From:</span> ${data.from || ""}</div>
+      <div><span class="field-label">To:</span> ${data.to || ""}</div>
     </div>
   </div>
 
   <div class="consignor-section">
     <div class="consignor-box">
       <span class="field-label">Consignor's Name & Address:</span><br>
-      ${data.consignorName || ''}<br>
-      ${data.consignorAddress || ''}
+      ${data.consignorName || ""}<br>
+      ${data.consignorAddress || ""}
     </div>
     <div class="consignee-box">
       <span class="field-label">Consignee Name & Address:</span><br>
-      ${data.consigneeName || ''}<br>
-      ${data.consigneeAddress || ''}
+      ${data.consigneeName || ""}<br>
+      ${data.consigneeAddress || ""}
     </div>
   </div>
 
@@ -122,14 +139,14 @@ function generatePDFHTML(data, copyType = 'all') {
   </table>
 
   <div class="items-summary">
-    <span><span class="field-label">Total Packages:</span> <span class="field-value">${totalPackages || ''}</span></span>
-    <span><span class="field-label">Value (Rs.):</span> <span class="field-value">${data.goodsValue || ''}</span></span>
+    <span><span class="field-label">Total Packages:</span> <span class="field-value">${totalPackages || ""}</span></span>
+    <span><span class="field-label">Value (Rs.):</span> <span class="field-value">${data.goodsValue || ""}</span></span>
   </div>
 
   <div class="charges-section">
     <div class="charges-left">
-      <div class="charge-row"><span class="label">Freight Per Kg./Cft.:</span> <span class="value">${data.freightPer || ''}</span></div>
-      <div class="charge-row"><span class="label">To pay / Paid / Due:</span> <span class="value">${data.paymentStatus || ''}</span></div>
+      <div class="charge-row"><span class="label">Freight Per Kg./Cft.:</span> <span class="value">${data.freightPer || ""}</span></div>
+      <div class="charge-row"><span class="label">To pay / Paid / Due:</span> <span class="value">${data.paymentStatus || ""}</span></div>
       <div class="endorsement-in-charges">
         <div class="endorsement-title">ENDORSEMENT:</div>
         <p>1. Not Negotiable with any Bank of Financial Institute.</p>
@@ -137,23 +154,23 @@ function generatePDFHTML(data, copyType = 'all') {
       </div>
     </div>
     <div class="charges-right">
-      <div class="charge-row"><span class="label">Service Tax:</span> <span class="value">Rs. ${data.serviceTax || ''}</span></div>
-      <div class="charge-row"><span class="label">Cover Charge:</span> <span class="value">Rs. ${data.coverCharge || ''}</span></div>
-      <div class="charge-row"><span class="label">Hamali Charges:</span> <span class="value">Rs. ${data.hamaliCharges || ''}</span></div>
-      <div class="charge-row"><span class="label">C.P. Charge:</span> <span class="value">Rs. ${data.cpCharge || ''}</span></div>
-      <div class="charge-row"><span class="label">Statistical Charges:</span> <span class="value">Rs. ${data.statisticalCharges || ''}</span></div>
-      <div class="charge-row"><span class="label">Amount:</span> <span class="value">Rs. ${data.amount || ''}</span></div>
+      <div class="charge-row"><span class="label">Service Tax:</span> <span class="value">Rs. ${data.serviceTax || ""}</span></div>
+      <div class="charge-row"><span class="label">Cover Charge:</span> <span class="value">Rs. ${data.coverCharge || ""}</span></div>
+      <div class="charge-row"><span class="label">Hamali Charges:</span> <span class="value">Rs. ${data.hamaliCharges || ""}</span></div>
+      <div class="charge-row"><span class="label">C.P. Charge:</span> <span class="value">Rs. ${data.cpCharge || ""}</span></div>
+      <div class="charge-row"><span class="label">Statistical Charges:</span> <span class="value">Rs. ${data.statisticalCharges || ""}</span></div>
+      <div class="charge-row"><span class="label">Amount:</span> <span class="value">Rs. ${data.amount || ""}</span></div>
     </div>
   </div>
 
   <div class="total-row">
     <span>Total</span>
-    <span>Rs. ${data.total || ''}</span>
+    <span>Rs. ${data.total || ""}</span>
   </div>
 
   <div class="footer-section">
     <div class="sig-block">
-      <div class="sig-value">${data.bookingOfficerSig || ''}</div>
+      <div class="sig-value">${data.bookingOfficerSig || ""}</div>
       <div class="sig-label">Signature of Booking Officer</div>
     </div>
   </div>
@@ -303,7 +320,7 @@ function generatePDFHTML(data, copyType = 'all') {
   }
   .footer-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
     padding: 6px;
     border-bottom: 1px solid #000;
@@ -325,17 +342,17 @@ function generatePDFHTML(data, copyType = 'all') {
   function buildPages(copyType) {
     const pages = [];
 
-    if (copyType === 'all' || copyType === 'consignee') {
-      pages.push(buildCopyPage('CONSIGNEE COPY'));
+    if (copyType === "all" || copyType === "consignee") {
+      pages.push(buildCopyPage("CONSIGNEE COPY"));
       pages.push(termsPage);
     }
 
-    if (copyType === 'all' || copyType === 'consignor') {
-      pages.push(buildCopyPage('CONSIGNOR COPY'));
+    if (copyType === "all" || copyType === "consignor") {
+      pages.push(buildCopyPage("CONSIGNOR COPY"));
     }
 
-    if (copyType === 'all' || copyType === 'office') {
-      pages.push(buildCopyPage('OFFICE COPY'));
+    if (copyType === "all" || copyType === "office") {
+      pages.push(buildCopyPage("OFFICE COPY"));
     }
 
     return pages.join('\n<div class="page-break"></div>\n');

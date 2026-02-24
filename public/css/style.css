@@ -1088,42 +1088,55 @@ select:focus {
   }
 }
 
+/* ================= MOBILE RESPONSIVE FIX ================= */
 @media (max-width: 768px) {
-  .toolbar {
+
+  /* Header layout vertical karo */
+  .header-content {
     flex-direction: column;
-    height: auto;
-    padding: 10px 16px;
-    gap: 8px;
+    gap: 10px;
   }
-  .toolbar-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .toolbar-actions button {
-    padding: 7px 14px;
-    font-size: 12px;
-  }
-  .toolbar-divider {
-    display: none;
-  }
-  .page-wrapper {
-    padding: 100px 12px 40px;
-  }
-  .page-label {
-    display: none;
-  }
+
+  /* Absolute positioning remove */
   .header-logo {
-    width: 60px;
-    height: 60px;
+    position: static;
+    transform: none;
+    width: 70px;
+    height: 70px;
   }
-  .header {
-    min-height: 100px;
+
+  /* Logos center alignment */
+  .header-logo-left,
+  .header-logo-right {
+    position: static;
   }
+
+  /* Company text spacing */
+  .header-text {
+    margin-top: 5px;
+  }
+
   .company-name {
     font-size: 22px;
+    line-height: 1.2;
   }
+
   .tagline {
     font-size: 10px;
     letter-spacing: 2px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  .address-line {
+    font-size: 9px;
+  }
+
+  /* Header height auto */
+  .header {
+    min-height: auto;
+    padding: 12px 10px;
   }
 }
