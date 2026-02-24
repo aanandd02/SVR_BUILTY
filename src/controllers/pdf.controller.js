@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+const { chromium } = require("playwright");
 const { generatePDFHTML } = require("../templates/builty.template");
 
 const COPY_LABELS = {
@@ -13,13 +13,9 @@ async function generatePDF(req, res) {
     const formData = req.body;
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 
-    const browser = await puppeteer.launch({
+    const browser = await chromium.launch({
       headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-      ],
+      args: ["--no-sandbox", "--disable-dev-shm-usage"],
     });
     const page = await browser.newPage();
 
@@ -33,7 +29,12 @@ async function generatePDF(req, res) {
     const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      margin: { top: "10mm", right: "8mm", bottom: "10mm", left: "8mm" },
+      margin: {
+        top: "10mm",
+        right: "8mm",
+        bottom: "10mm",
+        left: "8mm",
+      },
     });
 
     await browser.close();
