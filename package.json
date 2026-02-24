@@ -1,16 +1,11 @@
 {
   "name": "svr",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "postinstall": "npx playwright install"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "start": "npx playwright install chromium && node server.js"
+  },
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
