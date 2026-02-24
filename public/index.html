@@ -18,10 +18,19 @@
         <div class="toolbar-title"><span>SVR</span> &mdash; Builty</div>
       </div>
       <div class="toolbar-actions">
-        <button class="btn-add-row" onclick="addItemRow()">+ Row</button>
-        <button class="btn-reset" onclick="resetForm()">Reset</button>
-        <button class="btn-generate" onclick="generatePDF()">
-          Generate Builty
+        <button class="btn-add-row" onclick="addItemRow()" title="Add Row">
+          <span class="btn-text">+ Row</span>
+          <span class="btn-icon">➕</span>
+        </button>
+
+        <button class="btn-reset" onclick="resetForm()" title="Reset">
+          <span class="btn-text">Reset</span>
+          <span class="btn-icon">🔄</span>
+        </button>
+
+        <button class="btn-generate" onclick="generatePDF()" title="Generate">
+          <span class="btn-text">Generate consignee</span>
+          <span class="btn-icon">📄</span>
         </button>
         <div class="toolbar-divider"></div>
         <div class="toolbar-user-badge" id="toolbarUserBadge">

@@ -82,14 +82,14 @@ body::before {
 .toolbar-actions button:active {
   transform: scale(0.97);
 }
+
+.btn-icon {
+  display: none;
+  font-size: 16px;
+}
 /* ===== GENERATE BUTTON (PRIMARY) ===== */
 .btn-generate {
-  background: linear-gradient(
-    135deg,
-    #1c3f6e 0%,
-    #2c5c9c 55%,
-    #4f7fc4 100%
-  );
+  background: linear-gradient(135deg, #1c3f6e 0%, #2c5c9c 55%, #4f7fc4 100%);
   color: #fff;
   font-weight: 600;
   border: none;
@@ -97,18 +97,13 @@ body::before {
 
   box-shadow:
     0 4px 14px rgba(28, 63, 110, 0.28),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
   transition: all 0.25s ease;
 }
 
 .btn-generate:hover {
-  background: linear-gradient(
-    135deg,
-    #163458,
-    #244e86,
-    #3d6fb3
-  );
+  background: linear-gradient(135deg, #163458, #244e86, #3d6fb3);
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(28, 63, 110, 0.35);
 }
@@ -117,7 +112,6 @@ body::before {
   transform: translateY(0);
   box-shadow: 0 3px 10px rgba(28, 63, 110, 0.25);
 }
-
 
 /* ===== RESET BUTTON ===== */
 .btn-reset {
@@ -132,7 +126,6 @@ body::before {
   background: rgba(255, 255, 255, 0.22);
   color: #fff;
 }
-
 
 /* ===== ADD ROW BUTTON ===== */
 .btn-add-row {
@@ -936,7 +929,6 @@ body::before {
   transform: translateY(-1px);
 }
 
-
 /* ===== CLOSE BUTTON (SECONDARY) ===== */
 .btn-modal-close {
   background: #f3f4f6;
@@ -948,7 +940,6 @@ body::before {
 .btn-modal-close:hover {
   background: #e5e7eb;
 }
-
 
 /* ===== DOWNLOAD ALL BUTTON ===== */
 .btn-download-all {
@@ -1090,7 +1081,6 @@ select:focus {
 
 /* ================= MOBILE RESPONSIVE FIX ================= */
 @media (max-width: 768px) {
-
   /* Header layout vertical karo */
   .header-content {
     flex-direction: column;
@@ -1141,7 +1131,6 @@ select:focus {
   }
 }
 @media (max-width: 768px) {
-
   /* Hide Administrator */
   .toolbar-user-badge {
     display: none;
@@ -1161,10 +1150,50 @@ select:focus {
   }
 }
 @media (max-width: 768px) {
-
   /* Administrator hide on mobile */
   .toolbar-user-badge {
     display: none;
   }
+}
+@media (max-width: 768px) {
+  .toolbar-actions {
+    gap: 6px;
+  }
 
+  /* Text hide */
+  .btn-text {
+    display: none;
+  }
+
+  /* Icons show */
+  .btn-icon {
+    display: block;
+  }
+
+  /* Square icon buttons */
+  .toolbar-actions button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Generate button slightly highlight */
+  .btn-generate {
+    width: 44px;
+    height: 40px;
+  }
+
+  /* Hide admin badge */
+  .toolbar-user-badge {
+    display: none;
+  }
+
+  /* Logout compact */
+  .logout-text {
+    display: none;
+  }
 }
