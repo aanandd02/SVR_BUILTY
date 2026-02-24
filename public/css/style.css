@@ -1140,3 +1140,31 @@ select:focus {
     padding: 12px 10px;
   }
 }
+@media (max-width: 768px) {
+
+  /* Hide Administrator */
+  .toolbar-user-badge {
+    display: none;
+  }
+
+  /* Hide logout text */
+  .logout-text {
+    display: none;
+  }
+
+  /* Icon button compact */
+  .btn-signout {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+
+  /* Administrator hide on mobile */
+  .toolbar-user-badge {
+    display: none;
+  }
+
+}
