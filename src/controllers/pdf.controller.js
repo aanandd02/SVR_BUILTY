@@ -14,15 +14,11 @@ async function generatePDF(req, res) {
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 
     const browser = await puppeteer.launch({
-      headless: "new",
-      executablePath:
-        process.env.PUPPETEER_EXECUTABLE_PATH ||
-        "/opt/render/.cache/puppeteer/chrome/linux-145.0.7632.77/chrome-linux64/chrome",
+      headless: true,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
-        "--disable-gpu",
       ],
     });
     const page = await browser.newPage();
