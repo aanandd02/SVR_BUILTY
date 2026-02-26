@@ -40,7 +40,7 @@ function generatePDFHTML(data, copyType = "all") {
         <div class="tagline">SERVICE THROUGH COMMITMENT</div>
         <div class="subtitle">[Transport Contractors & Fleet Owners]</div>
         <div class="address">Plot No. 136-9-A, Near National Plywoods, II Phase GIDC Vapi-396 195.</div>
-        <div class="address">Ph. No. 8000785431, 9033900300</div>
+        <div class="address">Ph. No. 8000785431, 9033377799</div>
         <div class="address">E-mail : shreevishwanthtoadways@gmail.com, shreevishwanathroadways81@gmail.com</div>
       </div>
     </div>
