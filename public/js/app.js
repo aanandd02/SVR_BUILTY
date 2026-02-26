@@ -94,18 +94,25 @@ function collectFormData() {
   return data;
 }
 
-let _pdfBlobUrl = null;
-let _pdfFilename = null;
 let _lastFormData = null;
 
 async function generatePDF() {
   const data = collectFormData();
   _lastFormData = data;
-  const overlay = document.getElementById("loadingOverlay");
-  overlay.classList.add("active");
+  document.getElementById("successModal").classList.add("active");
+}
+
+async function downloadAllCopies() {
+  if (!_lastFormData) return;
+
+  const btn = document.getElementById("btnDownloadPdf");
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.style.opacity = "0.6";
+  btn.innerHTML = "Generating...";
 
   try {
-    data.copyType = "all";
+    const data = { ..._lastFormData, copyType: "all" };
     const response = await fetch("/api/generate-pdf", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -123,23 +130,17 @@ async function generatePDF() {
     }
 
     const blob = await response.blob();
-    overlay.classList.remove("active");
-
-    if (_pdfBlobUrl) URL.revokeObjectURL(_pdfBlobUrl);
-    _pdfBlobUrl = URL.createObjectURL(blob);
-    _pdfFilename = `builty-${data.consignmentNo || "SVR"}-all-copies.pdf`;
-
-    document.getElementById("btnDownloadPdf").onclick = downloadAllCopies;
-    document.getElementById("successModal").classList.add("active");
+    const url = URL.createObjectURL(blob);
+    const filename = `builty-${_lastFormData.consignmentNo || "SVR"}-all-copies.pdf`;
+    triggerDownload(url, filename);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
   } catch (error) {
-    overlay.classList.remove("active");
     alert("Error: " + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.innerHTML = origHTML;
   }
-}
-
-function downloadAllCopies() {
-  if (!_pdfBlobUrl) return;
-  triggerDownload(_pdfBlobUrl, _pdfFilename);
 }
 
 async function downloadCopy(copyType) {

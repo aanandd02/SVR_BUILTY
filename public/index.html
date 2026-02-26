@@ -71,10 +71,14 @@
     <div class="modal-overlay" id="successModal">
       <div class="modal-box modal-box-wide">
         <div class="modal-icon">&#10003;</div>
-        <h3>Generated Successfully!</h3>
-        <p>Your consignment note is ready. Choose a copy to download.</p>
+        <h3>Choose Copy to Download</h3>
+        <p>PDF will be generated only for the copy you select.</p>
 
-        <button class="btn-modal-download btn-download-all" id="btnDownloadPdf">
+        <button
+          class="btn-modal-download btn-download-all"
+          id="btnDownloadPdf"
+          onclick="downloadAllCopies()"
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
