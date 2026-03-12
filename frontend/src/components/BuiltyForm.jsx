@@ -150,6 +150,10 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
   return (
     <div className="page-shell">
       <div className="toolbar">
+        <div className="toolbar-brand">
+          <img src="/Logo.png" alt="SVR" className="toolbar-logo" />
+          <div className="toolbar-title">SVR Builty</div>
+        </div>
         <div className="toolbar-actions">
           <button className="btn-secondary" onClick={addItemRow}>+ Row</button>
           <button className="btn-secondary" onClick={resetForm}>Reset</button>
