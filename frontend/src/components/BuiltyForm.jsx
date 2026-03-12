@@ -57,7 +57,6 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [copyLoading, setCopyLoading] = useState('');
   const [toast, setToast] = useState('');
-  const displayName = user?.name && user.name !== 'Administrator' ? user.name : 'SVR';
 
   const totalPackages = useMemo(
     () => form.items.reduce((sum, row) => sum + (parseInt(row.packages, 10) || 0), 0),
@@ -158,7 +157,6 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <button className="btn-secondary" onClick={addItemRow}>+ Row</button>
           <button className="btn-secondary" onClick={resetForm}>Reset</button>
           <button className="btn-primary" onClick={handleGenerate}>Generate PDF</button>
-          <div className="toolbar-divider" />
           <button className="btn-text" onClick={onLogout}>Sign out</button>
         </div>
       </div>
