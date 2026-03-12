@@ -10,6 +10,10 @@
   --radius: 14px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -36,7 +40,7 @@ body {
   padding: 12px 18px;
   background: rgba(15, 39, 71, 0.97);
   color: #fff;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 .toolbar-brand {
@@ -137,7 +141,7 @@ body {
   padding: 18px 24px;
   background: linear-gradient(120deg, #ffffff 0%, #f3f6fb 100%);
   border-radius: 18px;
-  box-shadow: 0 20px 60px rgba(18, 38, 63, 0.12);
+  box-shadow: 0 16px 40px rgba(18, 38, 63, 0.1);
   margin-bottom: 18px;
 }
 
@@ -166,7 +170,7 @@ body {
   background: var(--card);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: 0 10px 35px rgba(15, 39, 71, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 39, 71, 0.07);
   margin-bottom: 16px;
   border: 1px solid rgba(15, 39, 71, 0.06);
 }
@@ -443,6 +447,46 @@ body {
   color: #111827;
 }
 
+.boot-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 20% 20%, rgba(47, 94, 168, 0.07), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(15, 39, 71, 0.08), transparent 32%),
+    linear-gradient(180deg, #f5f8ff 0%, #eef2f8 100%);
+}
+
+.boot-card {
+  background: #fff;
+  padding: 26px 26px 22px;
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(15, 39, 71, 0.12);
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(47, 94, 168, 0.08);
+}
+
+.boot-card h2 {
+  margin: 10px 0 6px;
+  color: #0f2747;
+}
+
+.boot-card p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.boot-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1f3b63, #2f5ea8);
+  margin: 0 auto 6px;
+  box-shadow: 0 0 0 10px rgba(47, 94, 168, 0.08);
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -606,9 +650,32 @@ body {
     flex: 1 1 48%;
     min-width: 120px;
   }
+  .toolbar-logo {
+    width: 34px;
+    height: 34px;
+  }
+  .toolbar-title {
+    font-size: 16px;
+  }
   .page-header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 14px 16px;
+  }
+  .page-header h1 {
+    font-size: 22px;
+  }
+  .card {
+    padding: 14px;
+  }
+  .field {
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .field input,
+  .field textarea {
+    padding: 9px 10px;
+    font-size: 13px;
   }
   .items-footer {
     flex-direction: column;
@@ -620,6 +687,10 @@ body {
   }
   .chip-row {
     gap: 6px;
+  }
+  .chip {
+    padding: 6px 10px;
+    font-size: 13px;
   }
   .modal {
     width: 96%;

@@ -159,8 +159,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <button className="btn-primary" onClick={handleGenerate}>Generate PDF</button>
           <div className="toolbar-divider" />
           <div className="toolbar-user">
-            <div className="user-avatar">{user?.name?.[0]?.toUpperCase() || 'A'}</div>
-            <span className="user-name">{user?.name || 'Admin'}</span>
+            <span className="user-name">{user?.name || 'SVR'}</span>
           </div>
           <button className="btn-text" onClick={onLogout}>Sign out</button>
         </div>
