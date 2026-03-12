@@ -43,7 +43,14 @@ async function generatePDF(req, res) {
 
     await browser.close();
 
-    const filename = `builty-${formData.consignmentNo || "SVR"}-${COPY_LABELS[copyType]}-${Date.now()}.pdf`;
+    const sanitize = (value) =>
+      String(value || "SVR")
+        .replace(/[\r\n]+/g, " ")
+        .replace(/[/\\\\?%*:|"<>]/g, "-")
+        .trim();
+
+    const safeConsignment = sanitize(formData.consignmentNo);
+    const filename = `builty-${safeConsignment}-${COPY_LABELS[copyType]}-${Date.now()}.pdf`;
 
     res.set({
       "Content-Type": "application/pdf",

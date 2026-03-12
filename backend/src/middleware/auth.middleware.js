@@ -3,11 +3,7 @@ function requireAuth(req, res, next) {
     return next();
   }
 
-  if (req.path.startsWith('/api')) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  return res.redirect('/login');
+  return res.status(401).json({ error: 'Unauthorized' });
 }
 
 module.exports = { requireAuth };
