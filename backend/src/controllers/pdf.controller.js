@@ -1,4 +1,4 @@
-const { chromium } = require("playwright");
+const puppeteer = require("puppeteer");
 const { generatePDFHTML } = require("../templates/builty.template");
 
 const COPY_LABELS = {
@@ -13,9 +13,9 @@ async function generatePDF(req, res) {
     const formData = req.body;
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 
-    const browser = await chromium.launch({
-      headless: true,
-      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+    const browser = await puppeteer.launch({
+      headless: "new",
+      executablePath: process.env.CHROME_EXECUTABLE_PATH,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
