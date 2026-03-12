@@ -14,13 +14,13 @@ async function generatePDF(req, res) {
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 
     const browser = await puppeteer.launch({
-      headless: "new",
-      executablePath:
-        "/opt/render/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome",
+      headless: true,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
+        "--single-process",
+        "--no-zygote",
       ],
     });
     const page = await browser.newPage();
@@ -30,7 +30,9 @@ async function generatePDF(req, res) {
       waitUntil: "domcontentloaded",
       timeout: 30000,
     });
-    await new Promise((r) => setTimeout(r, 2000));
+    await page.setContent(htmlContent, {
+      waitUntil: "networkidle0",
+    });
 
     const pdfBuffer = await page.pdf({
       format: "A4",
