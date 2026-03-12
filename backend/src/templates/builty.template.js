@@ -246,6 +246,7 @@ function generatePDFHTML(data, copyType = "all") {
     color: #8B0000;
   }
   .hindi-blessing {
+    font-family: 'Noto Sans Devanagari', 'Mangal', 'Hind', sans-serif;
     font-size: 13px;
     font-weight: bold;
     color: #8B0000;
@@ -363,6 +364,7 @@ function generatePDFHTML(data, copyType = "all") {
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 <style>${styles}</style>
 </head>
 <body>
