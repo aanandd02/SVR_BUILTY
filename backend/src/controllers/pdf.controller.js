@@ -13,8 +13,13 @@ async function generatePDF(req, res) {
     const formData = req.body;
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 
+    // Use pre-downloaded Chrome if Render has placed it at the path set via env
+    const executablePath =
+      process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath();
+
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
