@@ -465,27 +465,38 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
       {modalOpen && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>Download PDF</h3>
-            <p>Select the copy you want to generate.</p>
+            <div className="modal-header">
+              <div>
+                <div className="modal-eyebrow">Download</div>
+                <h3 className="modal-title">Choose the PDF copy</h3>
+                <p className="modal-subtitle">Pick the exact set you need. Each option downloads instantly.</p>
+              </div>
+              <button className="modal-close" onClick={() => setModalOpen(false)} aria-label="Close">×</button>
+            </div>
+
             <div className="modal-grid">
               <button className="modal-card" onClick={() => sendToServer('all')} disabled={!!copyLoading}>
-                <span className="label">All Copies</span>
-                <span className="desc">Consignee • Consignor • Office</span>
+                <div className="label">All Copies</div>
+                <div className="desc">Consignee • Consignor • Office</div>
+                <span className="chip">Recommended</span>
               </button>
               <button className="modal-card" onClick={() => sendToServer('consignee')} disabled={!!copyLoading}>
-                <span className="label">Consignee</span>
-                <span className="desc">With T&C</span>
+                <div className="label">Consignee</div>
+                <div className="desc">With terms & conditions</div>
               </button>
               <button className="modal-card" onClick={() => sendToServer('consignor')} disabled={!!copyLoading}>
-                <span className="label">Consignor</span>
-                <span className="desc">Without T&C</span>
+                <div className="label">Consignor</div>
+                <div className="desc">Without terms & conditions</div>
               </button>
               <button className="modal-card" onClick={() => sendToServer('office')} disabled={!!copyLoading}>
-                <span className="label">Office Copy</span>
-                <span className="desc">Internal</span>
+                <div className="label">Office Copy</div>
+                <div className="desc">Internal use</div>
               </button>
             </div>
-            <button className="btn-text" onClick={() => setModalOpen(false)}>Cancel</button>
+            <div className="modal-footer">
+              <span className="muted small">Tip: You can always generate another copy later.</span>
+              <button className="btn-secondary" onClick={() => setModalOpen(false)}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
