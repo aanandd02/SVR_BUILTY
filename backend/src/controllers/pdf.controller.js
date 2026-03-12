@@ -10,11 +10,6 @@ const COPY_LABELS = {
 
 async function generatePDF(req, res) {
   try {
-    // Ensure request is from an authenticated session
-    if (!req.session || !req.session.user) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
     const formData = req.body;
     const copyType = COPY_LABELS[formData.copyType] ? formData.copyType : "all";
 

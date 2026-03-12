@@ -14,8 +14,6 @@ const CLIENT_ORIGINS = (process.env.CLIENT_URLS || 'http://localhost:5173')
   .map((o) => o.trim())
   .filter(Boolean);
 
-const isProd = process.env.NODE_ENV === 'production';
-
 app.set('trust proxy', 1);
 
 app.use(cors({ origin: CLIENT_ORIGINS, credentials: true }));
@@ -28,12 +26,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   name: 'svr.sid',
-  rolling: true,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: isProd ? 'none' : 'lax',
-    secure: isProd
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
   }
 }));
 
