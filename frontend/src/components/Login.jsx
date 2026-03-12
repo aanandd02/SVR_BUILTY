@@ -39,11 +39,7 @@ function Login({ onSuccess }) {
           <div className="left-brand">Shree Vishwanath Roadways</div>
           <div className="left-tagline">SERVICE THROUGH COMMITMENT</div>
           <div className="left-hindi">॥ जय माँ विन्ध्यवासिनी ॥</div>
-          <p className="left-desc">
-            Securely sign in to create, preview and download consignee, consignor and office copies of the Builty PDF.
-          </p>
         </div>
-        <div className="left-footer">SVR • Since 1996 • Fleet Owners & Transport Contractors</div>
       </div>
       <div className="login-right">
         <div className="login-form-wrap">

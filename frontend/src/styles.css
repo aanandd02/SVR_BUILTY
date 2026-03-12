@@ -615,21 +615,6 @@ body {
   opacity: 0.75;
 }
 
-.left-desc {
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.7;
-}
-
-.left-footer {
-  position: absolute;
-  bottom: 28px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-}
-
 .login-right {
   background: #fff;
   display: grid;
@@ -699,6 +684,24 @@ body {
 @media (max-width: 900px) {
   .login-page {
     grid-template-columns: 1fr;
+  }
+  .login-left {
+    padding: 36px 22px 28px;
+    min-height: auto;
+  }
+  .left-logo {
+    width: 88px;
+    height: 88px;
+  }
+  .left-brand {
+    font-size: 30px;
+  }
+  .left-tagline {
+    letter-spacing: 3px;
+    font-size: 10px;
+  }
+  .left-hindi {
+    margin: 10px 0 12px;
   }
   .toolbar {
     position: static;
