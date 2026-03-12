@@ -57,6 +57,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [copyLoading, setCopyLoading] = useState('');
   const [toast, setToast] = useState('');
+  const displayName = user?.name && user.name !== 'Administrator' ? user.name : 'SVR';
 
   const totalPackages = useMemo(
     () => form.items.reduce((sum, row) => sum + (parseInt(row.packages, 10) || 0), 0),
@@ -149,17 +150,13 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
   return (
     <div className="page-shell">
       <div className="toolbar">
-        <div className="toolbar-brand">
-          <img src="/Logo.png" alt="SVR" className="toolbar-logo" />
-          <div className="toolbar-title">SVR Builty</div>
-        </div>
         <div className="toolbar-actions">
           <button className="btn-secondary" onClick={addItemRow}>+ Row</button>
           <button className="btn-secondary" onClick={resetForm}>Reset</button>
           <button className="btn-primary" onClick={handleGenerate}>Generate PDF</button>
           <div className="toolbar-divider" />
           <div className="toolbar-user">
-            <span className="user-name">{user?.name || 'SVR'}</span>
+            <span className="user-name">{displayName}</span>
           </div>
           <button className="btn-text" onClick={onLogout}>Sign out</button>
         </div>
