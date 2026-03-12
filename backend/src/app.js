@@ -29,7 +29,10 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: 'lax',
+    // Need cross-site cookie because frontend and backend live on different domains
+    // (svr-builty-frontend.onrender.com ↔ svr-builty-backend.onrender.com).
+    // Browsers drop the session cookie on XHR/fetch unless SameSite=None & Secure.
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production'
   }
 }));
