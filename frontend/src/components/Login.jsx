@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../apiClient.js';
 
 function Login({ onSuccess }) {
   const [username, setUsername] = useState('');
@@ -11,10 +12,9 @@ function Login({ onSuccess }) {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/auth/login', {
+      const res = await apiFetch('/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ username, password })
       });
 

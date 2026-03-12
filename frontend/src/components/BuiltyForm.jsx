@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { apiFetch } from '../apiClient.js';
 
 const CHARGE_FIELDS = ['serviceTax', 'coverCharge', 'hamaliCharges', 'cpCharge', 'statisticalCharges', 'amount'];
 const RISK_PRESETS = ['Owner Risk', 'Carrier Risk'];
@@ -102,10 +103,9 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
     setToast('');
     try {
       const payload = { ...form, copyType, total: totalCharges, totalPackages };
-      const res = await fetch('/api/generate-pdf', {
+      const res = await apiFetch('/api/generate-pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify(payload)
       });
 

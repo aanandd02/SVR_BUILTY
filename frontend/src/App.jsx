@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Login from './components/Login.jsx';
 import BuiltyForm from './components/BuiltyForm.jsx';
+import { apiFetch } from './apiClient.js';
 
 async function fetchCurrentUser() {
   try {
-    const res = await fetch('/auth/me', { credentials: 'include' });
+    const res = await apiFetch('/auth/me');
     if (res.ok) {
       const data = await res.json();
       return data.user || null;
@@ -28,7 +29,7 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await fetch('/auth/logout', { method: 'POST', credentials: 'include' });
+      await apiFetch('/auth/logout', { method: 'POST' });
     } catch (err) {
       console.error('Logout failed', err);
     }
