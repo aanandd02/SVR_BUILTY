@@ -159,9 +159,6 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <button className="btn-secondary" onClick={resetForm}>Reset</button>
           <button className="btn-primary" onClick={handleGenerate}>Generate PDF</button>
           <div className="toolbar-divider" />
-          <div className="toolbar-user">
-            <span className="user-name">{displayName}</span>
-          </div>
           <button className="btn-text" onClick={onLogout}>Sign out</button>
         </div>
       </div>
