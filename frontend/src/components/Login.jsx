@@ -35,10 +35,10 @@ function Login({ onSuccess }) {
     <div className="login-page">
       <div className="login-left">
         <div className="left-content">
+          <div className="left-hindi">॥ जय माँ विन्ध्यवासिनी ॥</div>
           <img src="/Logo.png" alt="SVR" className="left-logo" />
           <div className="left-brand">Shree Vishwanath Roadways</div>
           <div className="left-tagline">SERVICE THROUGH COMMITMENT</div>
-          <div className="left-hindi">॥ जय माँ विन्ध्यवासिनी ॥</div>
         </div>
       </div>
       <div className="login-right">
