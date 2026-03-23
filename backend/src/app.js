@@ -41,6 +41,7 @@ app.use('/auth', authRoutes);
 app.use('/api', requireAuth, pdfRoutes);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+app.get('/', (req, res) => res.json({ status: 'backend alive' }));
 
 app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
