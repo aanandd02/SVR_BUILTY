@@ -331,7 +331,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <div className="grid grid-2">
             <label className="field textarea">
               <span>Consignor</span>
-              <textarea rows="4" value={form.consignorName ? `${form.consignorName}\n${form.consignorAddress}`.trim() : form.consignorAddress}
+              <textarea rows="4" value={form.consignorName ? `${form.consignorName}\n${form.consignorAddress}` : form.consignorAddress}
                 onChange={(e) => {
                   const [firstLine, ...rest] = e.target.value.split('\n');
                   updateField('consignorName', firstLine || '');
@@ -341,7 +341,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
             </label>
             <label className="field textarea">
               <span>Consignee</span>
-              <textarea rows="4" value={form.consigneeName ? `${form.consigneeName}\n${form.consigneeAddress}`.trim() : form.consigneeAddress}
+              <textarea rows="4" value={form.consigneeName ? `${form.consigneeName}\n${form.consigneeAddress}` : form.consigneeAddress}
                 onChange={(e) => {
                   const [firstLine, ...rest] = e.target.value.split('\n');
                   updateField('consigneeName', firstLine || '');
