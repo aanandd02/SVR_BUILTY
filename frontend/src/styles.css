@@ -360,6 +360,12 @@ body {
   font-weight: 600;
 }
 
+.toast.error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
 .modal-overlay,
 .loading-overlay,
 .app-loading {

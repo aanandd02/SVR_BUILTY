@@ -56,7 +56,11 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
   const [form, setForm] = useState(createInitialForm());
   const [modalOpen, setModalOpen] = useState(false);
   const [copyLoading, setCopyLoading] = useState('');
-  const [toast, setToast] = useState('');
+  const [toast, setToast] = useState({ message: '', type: 'info' });
+
+  const showToast = (message, type = 'info') => {
+    setToast({ message, type });
+  };
 
   const totalPackages = useMemo(
     () => form.items.reduce((sum, row) => sum + (parseInt(row.packages, 10) || 0), 0),
@@ -86,7 +90,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
 
   const resetForm = () => {
     setForm(createInitialForm());
-    setToast('Form cleared');
+    showToast('Form cleared', 'info');
   };
 
   const triggerDownload = (url, filename) => {
@@ -100,7 +104,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
 
   const sendToServer = async (copyType) => {
     setCopyLoading(copyType);
-    setToast('');
+    showToast('', 'info');
     try {
       const [cName, ...cAddr] = form.consignorName.split('\n');
       const [ceName, ...ceAddr] = form.consigneeName.split('\n');
@@ -138,9 +142,9 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
         copyType === 'all' ? 'all-copies' : `${copyType}-copy`
       }.pdf`;
       triggerDownload(url, filename);
-      setToast('PDF ready 🎉');
+      showToast('PDF ready 🎉', 'info');
     } catch (err) {
-      setToast(err.message);
+      showToast(err.message, 'error');
     } finally {
       setCopyLoading('');
       setModalOpen(false);
@@ -153,7 +157,7 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
 
   const handleGenerate = () => {
     if (!hasMinimumData) {
-      setToast('Add Consignment No., Consignor and Consignee to proceed.');
+      showToast('Add Consignment No., Consignor and Consignee to proceed.', 'error');
       return;
     }
     setModalOpen(true);
@@ -184,7 +188,11 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <div className="badge">Draft</div>
         </header>
 
-        {toast && <div className="toast">{toast}</div>}
+        {toast.message && (
+          <div className={`toast ${toast.type === 'error' ? 'error' : ''}`}>
+            {toast.message}
+          </div>
+        )}
 
         <section className="card">
           <div className="section-title">Reference</div>
