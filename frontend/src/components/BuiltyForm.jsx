@@ -102,7 +102,20 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
     setCopyLoading(copyType);
     setToast('');
     try {
-      const payload = { ...form, copyType, total: totalCharges, totalPackages };
+      const [cName, ...cAddr] = form.consignorName.split('\n');
+      const [ceName, ...ceAddr] = form.consigneeName.split('\n');
+
+      const payload = {
+        ...form,
+        consignorName: cName || '',
+        consignorAddress: cAddr.join('\n') || '',
+        consigneeName: ceName || '',
+        consigneeAddress: ceAddr.join('\n') || '',
+        copyType,
+        total: totalCharges,
+        totalPackages
+      };
+
       const res = await apiFetch('/api/generate-pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -331,23 +344,21 @@ function BuiltyForm({ user, onLogout, onAuthFail }) {
           <div className="grid grid-2">
             <label className="field textarea">
               <span>Consignor</span>
-              <textarea rows="4" value={form.consignorName ? `${form.consignorName}\n${form.consignorAddress}` : form.consignorAddress}
-                onChange={(e) => {
-                  const [firstLine, ...rest] = e.target.value.split('\n');
-                  updateField('consignorName', firstLine || '');
-                  updateField('consignorAddress', rest.join('\n'));
-                }}
-                placeholder="Name and address" />
+              <textarea
+                rows="4"
+                value={form.consignorName}
+                onChange={(e) => updateField('consignorName', e.target.value)}
+                placeholder="Name and address"
+              />
             </label>
             <label className="field textarea">
               <span>Consignee</span>
-              <textarea rows="4" value={form.consigneeName ? `${form.consigneeName}\n${form.consigneeAddress}` : form.consigneeAddress}
-                onChange={(e) => {
-                  const [firstLine, ...rest] = e.target.value.split('\n');
-                  updateField('consigneeName', firstLine || '');
-                  updateField('consigneeAddress', rest.join('\n'));
-                }}
-                placeholder="Name and address" />
+              <textarea
+                rows="4"
+                value={form.consigneeName}
+                onChange={(e) => updateField('consigneeName', e.target.value)}
+                placeholder="Name and address"
+              />
             </label>
           </div>
         </section>
